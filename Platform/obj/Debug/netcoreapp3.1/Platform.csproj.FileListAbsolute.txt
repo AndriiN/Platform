@@ -18,3 +18,9 @@ D:\sandbox\myTraning\Сhapter_12\Platform\Platform\obj\Debug\netcoreapp3.1\Platf
 D:\sandbox\myTraning\Сhapter_12\Platform\Platform\obj\Debug\netcoreapp3.1\Platform.dll
 D:\sandbox\myTraning\Сhapter_12\Platform\Platform\obj\Debug\netcoreapp3.1\Platform.pdb
 D:\sandbox\myTraning\Сhapter_12\Platform\Platform\obj\Debug\netcoreapp3.1\Platform.genruntimeconfig.cache
+D:\sandbox\myTraning\Сhapter_12\Platform\Platform\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\sandbox\myTraning\Сhapter_12\Platform\Platform\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\sandbox\myTraning\Сhapter_12\Platform\Platform\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\sandbox\myTraning\Сhapter_12\Platform\Platform\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\sandbox\myTraning\Сhapter_12\Platform\Platform\obj\Debug\netcoreapp3.1\Platform.MvcApplicationPartsAssemblyInfo.cs
+D:\sandbox\myTraning\Сhapter_12\Platform\Platform\obj\Debug\netcoreapp3.1\Platform.csproj.CopyComplete
