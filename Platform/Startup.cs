@@ -26,6 +26,18 @@ namespace Platform
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use(async (context, next) => {
+                if (context.Request.Method == HttpMethods.Get
+                 && context.Request.Query["custom"] == "true")
+                {
+                    await context.Response.WriteAsync("Custom Middleware \n");
+                    /* http://localhost:5000/?custom=true 
+                       http://localhost:5000/?custom=false  */
+                }
+                await next();
+            });
+
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
