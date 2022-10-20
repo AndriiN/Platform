@@ -37,6 +37,7 @@ namespace Platform
                 await next();
             });
 
+            app.UseMiddleware<QueryStringMiddleWare>();
 
             app.UseRouting();
 
