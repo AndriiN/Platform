@@ -20,24 +20,30 @@ namespace Platform
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+            IWebHostEnvironment env, 
+            IOptions<MessageOptions> msgOptions)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Map("/branch", branch =>
+            app.Use(async (context, next) =>
             {
-                branch.Run(new QueryStringMiddleWare().Invoke);
-                //branch.UseMiddleware<QueryStringMiddleWare>();
-                //branch.Run(async (context) => {             // <---------------
-                //    await context.Response.WriteAsync($"Branch Middleware");
-                //});
+                if (context.Request.Path == "/location")
+                {
+                    MessageOptions opts = msgOptions.Value;
+                    await context.Response.WriteAsync($"{opts.CityName}, {opts.CountryName}");
+                }
+                else
+                {
+                    await next();
+                }
             });
 
-            /* http://localhost:5000/?custom=true 
-               http://localhost:5000/branch?custom=true */
+            // http://localhost:5000/location 
+             
 
             app.UseMiddleware<QueryStringMiddleWare>();
 
