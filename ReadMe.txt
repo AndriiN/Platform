@@ -1,9 +1,11 @@
 AndriiN
-Understanding the Return Pipeline Path. Chapter 12 ■ Understanding the ASP.NET Core Platform
+Short-Circuiting the Request Pipeline. Chapter 12 ■ Understanding the ASP.NET Core Platform p.268
 
-Middleware components can modify the HTTPResponse object after the next function has been called, as shown by the new
-middleware in Listing 12-7.
+Components that generate complete responses can choose not to call the next function so that the request isn’t passed on.
+Components that don’t pass on requests are said to short-circuit the pipeline, which is what the new middleware component shown
+in Listing 12-8 does for requests that target the /short URL.
 
-Middleware can operate before the request is passed on, after the request has been processed by other components, or both.
-The result is that several middleware components collectively contribute to the response that is produced, each providing some
-aspect of the response or providing some feature or data that is used later in the pipeline.
+Even though the URL has the query string parameter that is expected by the next component in the pipeline, the request
+isn’t forwarded, so that middleware doesn’t get used. Notice, however, that the previous component in the pipeline has added its
+message to the response. That’s because the short-circuiting only prevents components further along the pipeline from being used
+and doesn’t affect earlier components, as illustrated in Figure 12-13
