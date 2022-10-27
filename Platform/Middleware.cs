@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using Platform;
 
 namespace Platform
 {
@@ -9,9 +7,9 @@ namespace Platform
 	{
 		private RequestDelegate next;
 		public QueryStringMiddleWare()
-		{
+        {
 			// anithing do
-		}
+        }
 		public QueryStringMiddleWare(RequestDelegate nextDelegate)
 		{
 			next = nextDelegate;
@@ -24,12 +22,11 @@ namespace Platform
 			{
 				await context.Response.WriteAsync("Class-based Middleware \n");
 			}
-			if (next != null)
-			{
+			if(next != null)
+            {
 				await next(context);
 			}
 		}
 	}
 }
-
 

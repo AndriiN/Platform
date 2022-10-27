@@ -1,12 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Platform
 {
@@ -28,10 +29,11 @@ namespace Platform
 
             app.Map("/branch", branch =>
             {
-                branch.UseMiddleware<QueryStringMiddleWare>();
-                branch.Use(async (context, next) => { 
-                   await context.Response.WriteAsync($"Branch Middleware");
-                });
+                branch.Run(new QueryStringMiddleWare().Invoke);
+                //branch.UseMiddleware<QueryStringMiddleWare>();
+                //branch.Run(async (context) => {             // <---------------
+                //    await context.Response.WriteAsync($"Branch Middleware");
+                //});
             });
 
             /* http://localhost:5000/?custom=true 
