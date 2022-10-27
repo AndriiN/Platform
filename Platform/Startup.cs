@@ -33,6 +33,20 @@ namespace Platform
                 .WriteAsync($"\nStatus Code: {context.Response.StatusCode}");
             });
 
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path == "/short")
+                {
+                    await context.Response
+                       .WriteAsync($"Request Short Circuited");
+                }
+                else
+                {
+                    await next();
+                }
+            });
+            // http://localhost:5000/short?custom=true
+
             app.Use(async (context, next) => {
                 if (context.Request.Method == HttpMethods.Get
                  && context.Request.Query["custom"] == "true")
