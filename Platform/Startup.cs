@@ -17,33 +17,25 @@ namespace Platform
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MessageOptions>(options =>
+            {
+                options.CityName = "Albany";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, 
-            IWebHostEnvironment env, 
-            IOptions<MessageOptions> msgOptions)
+        public void Configure(IApplicationBuilder app,
+            IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "/location")
-                {
-                    MessageOptions opts = msgOptions.Value;
-                    await context.Response.WriteAsync($"{opts.CityName}, {opts.CountryName}");
-                }
-                else
-                {
-                    await next();
-                }
-            });
+            app.UseMiddleware<LocationMiddleware>();
 
             // http://localhost:5000/location 
-             
+
 
             app.UseMiddleware<QueryStringMiddleWare>();
 
